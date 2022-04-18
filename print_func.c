@@ -94,15 +94,15 @@ int op_d(va_list op_l)
 	return (i);
 }
 /**
- * op_d - Entry Point
- * Desc: op_d function that prints an decimal integer
+ * op_b - Entry Point
+ * Desc: op_b function that prints a b literal
  * @op_l: va_list op_l
  * Return: numbers of integer printed.
  */
 int op_b(va_list op_l)
 {
-    int cont = 0;
-    int x = 0, len = 0;
+	int cont = 0;
+	int x = 0, len = 0;
 	char str[33];
 	unsigned int num = va_arg(op_l, unsigned int);
 
