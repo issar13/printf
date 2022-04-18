@@ -1,49 +1,45 @@
 #include "main.h"
-
+#include <stdarg.h>
+#include <unistd.h>
 /**
- * _printf - Entry Point
- * Desc: _printf function
- * @format: format type
- * Return: Function that produces output according to a format.
+ *_printf - funtion that print.
+ * @format: const char type.
+ * Return: Number of digits.
  */
 int _printf(const char *format, ...)
 {
-	op_t ops[] = {{"c", op_c}, {"s", op_s}, {"%", op_mod},
-		      {"d", op_d}, {"i", op_d}, {NULL, NULL}};
-	va_list op_l;
-	int i = 0, j;
-	int cont = 0, issa;
+	va_list arguments_list;
+	int cont = 0, i = -1;
+	int (*z)(va_list);
 
-	if (format == NULL || (format[i] == '%' && format[(i + 1)] == '\0'))
+	va_start(arguments_list, format);
+	if (format == NULL)
 		return (-1);
-	va_start(op_l, format);
-	for (i = 0; format[i] != '\0'; i++)
+
+	if (format != NULL)
 	{
-		if (format[i] == '%')
+		i = 0;
+		for (; format[cont] != '\0'; i++, cont++)
 		{
-			issa = 0;
-			for (j = 0; ops[j].op != NULL; j++)
+			if (format[cont] != '%')
+				_putchar(format[cont]);
+			else if (format[cont] == '%' && format[cont + 1] == '\0')
 			{
-				if (format[i + 1] == ops[j].op[0])
+				return (-1);
+			}
+			else if (format[cont] == '%' && format[cont + 1] != '\0')
+			{
+				z = get_func(format[cont + 1]);
+				if (z == NULL)
+					_putchar(format[cont]);
+				else
 				{
-					cont += ops[j].f(op_l);
-					issa++;
+					i = (i + z(arguments_list)) - 1;
+					cont++;
 				}
 			}
-			if (issa > 0)
-				i++;
-			else
-			{
-				_putchar(format[i]);
-				cont++;
-			}
-		}
-		else
-		{
-			_putchar(format[i]);
-			cont++;
 		}
 	}
-	va_end(op_l);
-	return (cont);
+	va_end(arguments_list);
+	return (i);
 }
