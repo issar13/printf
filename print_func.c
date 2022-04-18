@@ -93,3 +93,39 @@ int op_d(va_list op_l)
 
 	return (i);
 }
+/**
+ * op_d - Entry Point
+ * Desc: op_d function that prints an decimal integer
+ * @op_l: va_list op_l
+ * Return: numbers of integer printed.
+ */
+int op_b(va_list op_l)
+{
+    int cont = 0;
+    int x = 0, len = 0;
+	char str[33];
+	unsigned int num = va_arg(op_l, unsigned int);
+
+	if (num == 0)
+	{
+		_putchar(num + '0'), cont++;
+		return (cont);
+	}
+	while (num != 0)
+	{
+		str[x] = (num % 2) + 48;
+		num = num / 2;
+		x++;
+	}
+	str[x] = '\0';
+	for (x = 0; str[x] != '\0'; x++)
+	{
+		len++;
+	}
+	for (x = (len - 1); x >= 0; x--)
+	{
+		_putchar(str[x]);
+		cont++;
+	}
+	return (cont);
+}
