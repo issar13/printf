@@ -1,0 +1,65 @@
+.\" Printf manpage for Holberton School
+.TH _PRINTF 1 "29 October 2019" "version 1.0" "HOLBERTON PRINTF PROYECT"
+.SH NAME
+printf
+.SH SYNOPSIS
+.B #include "holberton.h"
+.br
+.B #include <stdio.h>
+.br
+.B int _printf(const char *format, ...);
+.SH FILES
+.B holberton.h
+.br
+.B _putchar.c
+.br
+.B print_func.c
+.br
+.B printf.c
+.br
+.B README.md
+.SH DESCRIPTION
+The function
+.B printf()
+produces output according to a format given. Returns the
+number of characters printed (excluding the null byte used to end output to
+strings). The function
+.B printf()
+write output to stdout, the standard output stream.
+.SS Format
+.B format
+is a character string. The
+.B format
+string is composed of zero
+or more directives. Conversion specifications are introduced by the character
+.B %
+, and ends with a conversion specifier.
+.SS The conversion specifier
+It´s a character that specifies the type of conversion to be applied. The
+conversion specifiers and their meanings.
+.TP
+.B d, i
+An
+.I int
+argument is converted to signed decimal notation.
+.TP
+.B c
+A single character
+.TP
+.B s
+A string. The
+.I "const char\ *"
+argument is expected to be a pointer to an array of character type (pointer
+to a string). The string should end with a terminating null byte (\'\\0\').
+.TP
+.B %
+A '%' is written.  No argument is converted.  The complete conversion
+specification is '%%'.
+.SH COLOPHON
+This man page was released finishing Project
+.B 0x11. C - printf,
+at ALX School, tasks 0, 1, and 2..
+.SH AUTHOR(S)
+Issa Mwazighe Suleiman - 1227@holbertonschool.com
+.br
+Ryton Odhiambo - 1209@holbertonschool.com
