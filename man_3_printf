@@ -1,65 +1,63 @@
-.\" Printf manpage for ALX School
-.TH _PRINTF 1 "29 October 2019" "version 1.0" "op_l PRINTF PROYECT"
+.\" Manpage for _printf
+.TH man 3 "17 April 2022" "1.0" "_printf"
 .SH NAME
-printf
+_printf - prints output according to format
+
 .SH SYNOPSIS
-.B #include "main.h"
-.br
-.B #include <stdio.h>
-.br
-.B int _printf(const char *format, ...);
-.SH FILES
-.B main.h
-.br
-.B _putchar.c
-.br
-.B print_func.c
-.br
-.B printf.c
-.br
-.B README.md
+_printf FORMAT [ARGUMENT]...
+
+.SH OPTIONS
+N/A
+
 .SH DESCRIPTION
-The function
-.B printf()
-produces output according to a format given. Returns the
-number of characters printed (excluding the null byte used to end output to
-strings). The function
-.B printf()
-write output to stdout, the standard output stream.
-.SS Format
-.B format
-is a character string. The
-.B format
-string is composed of zero
-or more directives. Conversion specifications are introduced by the character
-.B %
-, and ends with a conversion specifier.
-.SS The conversion specifier
-It´s a character that specifies the type of conversion to be applied. The
-conversion specifiers and their meanings.
-.TP
-.B d, i
-An
-.I int
-argument is converted to signed decimal notation.
-.TP
-.B c
-A single character
-.TP
-.B s
-A string. The
-.I "const char\ *"
-argument is expected to be a pointer to an array of character type (pointer
-to a string). The string should end with a terminating null byte (\'\\0\').
-.TP
-.B %
-A '%' is written.  No argument is converted.  The complete conversion
-specification is '%%'.
-.SH COLOPHON
-This man page was released finishing Project
-.B 0x11. C - printf,
-at ALX School, tasks 0, 1, and 2..
-.SH AUTHOR(S)
-Issa Mwazighe Suleiman 
-.br
-Ryton Odhiambo 
+Print ARGUMENT(s) according to FORMAT
+
+FORMAT controls the output. Able to interpret following sequences:
+
+\\" 	double quote
+
+\\\\ 	backslash
+
+\\b 	backspace
+
+\\n 	new line
+
+\\t 	horizontal tab
+
+%% 	a single %
+
+%[SPECIFIER] - List of valid specifiers
+
+	%c 	prints a character
+
+	%s 	prints a string
+
+	%d 	prints an integer
+
+	%i 	prints an integer
+
+	%r 	prints a reversed string
+
+	%x 	prints lowercase hexadecimal
+
+	%X 	prints uppercase hexadecimal
+
+	%o 	prints octal
+
+	%b	prints binary
+
+	%u	prints unsigned integer
+
+.SH EXIT VALUES
+Returns count of total characters printed
+
+Returns -1 if invalid FORMAT
+
+.SH BUGS
+Report bugs to buglover@bug.gov
+
+.SH AUTHORS
+Created by Issa Suleiman and Ryton Odhiambo
+
+.SH COPYRIGHT
+N/A
