@@ -1,49 +1,51 @@
 #include "main.h"
 
 /**
- * _printf - Entry Point
- * Desc: _printf function
- * @format: format type
- * Return: Function that produces output according to a format.
+ * _printf - formatted output conversion and print data.
+ * @format: input string.
+ *
+ * Return: number of chars printed.
  */
 int _printf(const char *format, ...)
 {
-	op_t ops[] = {{"c", op_c}, {"s", op_s}, {"%", op_mod},
-		      {"d", op_d}, {"i", op_d}, {"b", op_b}, {NULL, NULL}};
-	va_list op_l;
-	int i = 0, j;
-	int cont = 0, bandera;
+	unsigned int i = 0, len = 0, ibuf = 0;
+	va_list arguments;
+	int (*function)(va_list, char *, unsigned int);
+	char *buffer;
 
-	if (format == NULL || (format[i] == '%' && format[(i + 1)] == '\0'))
+	va_start(arguments, format), buffer = malloc(sizeof(char) * 1024);
+	if (!format || !buffer || (format[i] == '%' && !format[i + 1]))
 		return (-1);
-	va_start(op_l, format);
-	for (i = 0; format[i] != '\0'; i++)
+	if (!format[i])
+		return (0);
+	for (i = 0; format && format[i]; i++)
 	{
 		if (format[i] == '%')
 		{
-			bandera = 0;
-			for (j = 0; ops[j].op != NULL; j++)
-			{
-				if (format[i + 1] == ops[j].op[0])
-				{
-					cont += ops[j].f(op_l);
-					bandera++;
-				}
+			if (format[i + 1] == '\0')
+			{	print_buf(buffer, ibuf), free(buffer), va_end(arguments);
+				return (-1);
 			}
-			if (bandera > 0)
-				i++;
 			else
-			{
-				_putchar(format[i]);
-				cont++;
-			}
+			{	function = get_print_func(format, i + 1);
+				if (function == NULL)
+				{
+					if (format[i + 1] == ' ' && !format[i + 2])
+						return (-1);
+					handl_buf(buffer, format[i], ibuf), len++, i--;
+				}
+				else
+				{
+					len += function(arguments, buffer, ibuf);
+					i += ev_print_func(format, i + 1);
+				}
+			} i++;
 		}
 		else
-		{
-			_putchar(format[i]);
-			cont++;
-		}
+			handl_buf(buffer, format[i], ibuf), len++;
+		for (ibuf = len; ibuf > 1024; ibuf -= 1024)
+			;
 	}
-	va_end(op_l);
-	return (cont);
+	print_buf(buffer, ibuf), free(buffer), va_end(arguments);
+	return (len);
 }
