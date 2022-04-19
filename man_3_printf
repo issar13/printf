@@ -1,15 +1,15 @@
-.\" Printf manpage for Holberton School
-.TH _PRINTF 1 "29 October 2019" "version 1.0" "HOLBERTON PRINTF PROYECT"
+.\" Printf manpage for ALX School
+.TH _PRINTF 1 "29 October 2019" "version 1.0" "op_l PRINTF PROYECT"
 .SH NAME
 printf
 .SH SYNOPSIS
-.B #include "holberton.h"
+.B #include "main.h"
 .br
 .B #include <stdio.h>
 .br
 .B int _printf(const char *format, ...);
 .SH FILES
-.B holberton.h
+.B main.h
 .br
 .B _putchar.c
 .br
@@ -60,6 +60,6 @@ This man page was released finishing Project
 .B 0x11. C - printf,
 at ALX School, tasks 0, 1, and 2..
 .SH AUTHOR(S)
-Issa Mwazighe Suleiman - 1227@holbertonschool.com
+Issa Mwazighe Suleiman 
 .br
-Ryton Odhiambo - 1209@holbertonschool.com
+Ryton Odhiambo 

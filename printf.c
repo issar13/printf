@@ -1,49 +1,86 @@
+#include <stdarg.h>
 #include "main.h"
+#include <stddef.h>
 
 /**
- * _printf - Entry Point
- * Desc: _printf function
- * @format: format type
- * Return: Function that produces output according to a format.
+ * get_op - select function for conversion char
+ * @c: char to check
+ * Return: pointer to function
  */
+
+int (*get_op(const char c))(va_list)
+{
+	int i = 0;
+
+	flags_p fp[] = {
+		{"c", print_char},
+		{"s", print_str},
+		{"i", print_nbr},
+		{"d", print_nbr},
+		{"b", print_binary},
+		{"o", print_octal},
+		{"x", print_hexa_lower},
+		{"X", print_hexa_upper},
+		{"u", print_unsigned},
+		{"S", print_str_unprintable},
+		{"r", print_str_reverse},
+		{"p", print_ptr},
+		{"R", print_rot13},
+		{"%", print_percent}
+	};
+	while (i < 14)
+	{
+		if (c == fp[i].c[0])
+		{
+			return (fp[i].f);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+/**
+ * _printf - Reproduce behavior of printf function
+ * @format: format string
+ * Return: value of printed chars
+ */
+
 int _printf(const char *format, ...)
 {
-	op_t ops[] = {{"c", op_c}, {"s", op_s}, {"%", op_mod},
-		      {"d", op_d}, {"i", op_d}, {"b", op_b}, {NULL, NULL}};
-	va_list op_l;
-	int i = 0, j;
-	int cont = 0, bandera;
+	va_list ap;
+	int sum = 0, i = 0;
+	int (*func)();
 
-	if (format == NULL || (format[i] == '%' && format[(i + 1)] == '\0'))
+	if (!format || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
-	va_start(op_l, format);
-	for (i = 0; format[i] != '\0'; i++)
+	va_start(ap, format);
+
+	while (format[i])
 	{
 		if (format[i] == '%')
 		{
-			bandera = 0;
-			for (j = 0; ops[j].op != NULL; j++)
-			{
-				if (format[i + 1] == ops[j].op[0])
-				{
-					cont += ops[j].f(op_l);
-					bandera++;
-				}
-			}
-			if (bandera > 0)
-				i++;
-			else
+			if (format[i + 1] != '\0')
+				func = get_op(format[i + 1]);
+			if (func == NULL)
 			{
 				_putchar(format[i]);
-				cont++;
+				sum++;
+				i++;
+			}
+			else
+			{
+				sum += func(ap);
+				i += 2;
+				continue;
 			}
 		}
 		else
 		{
 			_putchar(format[i]);
-			cont++;
+			sum++;
+			i++;
 		}
 	}
-	va_end(op_l);
-	return (cont);
+	va_end(ap);
+	return (sum);
 }
