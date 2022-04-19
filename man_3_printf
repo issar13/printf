@@ -1,9 +1,10 @@
 .\" Printf manpage for Holberton School
-.TH _PRINTF 1 "29 October 2019" "version 1.0" "HOLBERTON PRINTF PROYECT"
+.TH _PRINTF 1 "19 April 2022" "version 1.0" "HOLBERTON PRINTF PROJECT"
 .SH NAME
-printf
+.B _printf - an implementation of printf function
 .SH SYNOPSIS
-.B #include "holberton.h"
+.B _printf() 
+- is a Holberton school group project. The task is to write a custom version of printf() from standard library.
 .br
 .B #include <stdio.h>
 .br
@@ -62,4 +63,4 @@ at ALX School, tasks 0, 1, and 2..
 .SH AUTHOR(S)
 Issa Mwazighe Suleiman - 1227@holbertonschool.com
 .br
-Ryton Odhiambo - 1209@holbertonschool.com
+Ryton Odhiambo - ritonodhiambo@gmail.com
